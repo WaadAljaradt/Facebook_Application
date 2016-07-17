@@ -39,6 +39,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+
 app.get('/signin',home.sign_in);
 app.post('/signin', home.after_sign_in);
 app.post('/signup', home.after_sign_up);
@@ -51,17 +52,29 @@ app.get('/fail_login', function(req,res){
   res.render('signin');
 });
 app.get('/createGroup', function(req,res){
+	if(req.session.Email==null){
+		res.render("signin");
+	}else{
 	  res.render('createGroup');
+	}
 	});
 app.get('/groups', function(req,res){
+	if(req.session.Email==null){
+		res.render("signin");
+	}else{
 	console.log("groups"+ req.session.groups);
 	  res.render('ListGroups', {groups:req.session.groups});
+	}
 });
 app.post('/SearchGroup',group.SearchGroup);
 app.get('/SearchGroup',group.getSearchGroup);
 app.post('/createGroup',group.CreateGroup);
 app.get('/group', function(req,res){
+	if(req.session.Email==null){
+		res.render("signin");
+	}else{
 	  res.render('group',{GroupName: req.session.GroupName, GroupDesc: req.session.GroupDesc});
+	}
 });
 app.get('/listGroups',group.listGroups);
 
@@ -97,16 +110,6 @@ app.get('/user',function(req,res){
 				}
 );
 
-
-
-/*app.post('/checklogin', login.checkLogin); 
-app.post('/logout', login.logout);
-
-app.get('/signup', function(req,res){
-  res.render('signup',{error: null});
-});
-
-*/
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
