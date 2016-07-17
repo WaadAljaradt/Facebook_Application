@@ -2,11 +2,11 @@
 
 # facebook_server
 
-
+facebook application prototype
 
 ## Usage
 
-
+refer to facebook-client for details about usage
 
 ## Developing
 
