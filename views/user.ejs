@@ -1,0 +1,179 @@
+<html ng-app="userapp">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Facebook Style Home Page Design - demo by w3lessons.info</title>
+<link rel="stylesheet"  href='/stylesheets/style.css'  type="text/css" />
+<style>
+div.relative {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    border: 3px solid #3b5998 ;
+}
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+</head>
+<script>
+         
+  var userapp = angular.module('userapp', []); 
+   
+      userapp.controller('user', ['$scope','$http',function($scope, $http) {        
+
+  $scope.logout = function() { $http({              
+       method: 'POST',              
+       url: '/logout'                                   
+       }).success(function(response){                                                          
+       window.location = '/signin';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+$scope.home = function() { $http({              
+       method: 'Get',              
+       url: '/profile'                                   
+       }).success(function(response){                                                          
+       window.location = '/profile';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+  $scope.Addfriend = function() { $http({              
+       method: 'Post',              
+       url: '/Addfriend' ,
+       data :{ UserName : $scope.UserName}                                 
+       }).success(function(response){
+       if(response.code == "200")                                                           
+       window.location = '/user'; 
+       else
+        alert("No results found");
+                             
+}).error(function(error){             
+alert(error);
+        
+ });     
+  };
+  $scope.confirm = function() { $http({              
+       method: 'Post',              
+       url: '/confirm' ,
+       data :{ UserName : $scope.UserName}                                 
+       }).success(function(response){
+       if(response.code == "200")                                                           
+       window.location = '/user'; 
+       else
+        alert("No results found");
+                             
+}).error(function(error){             
+alert(error);
+        
+ });     
+  };
+  
+  $scope.unfriend = function() { $http({              
+       method: 'Post',              
+       url: '/unfriend' ,
+       data :{ UserName : $scope.UserName}                                 
+       }).success(function(response){
+       if(response.code == "200")                                                           
+       window.location = '/user'; 
+       else
+        alert("No results found");
+                             
+}).error(function(error){             
+alert(error);
+        
+ });     
+  };
+  $scope.decline = function() { $http({              
+       method: 'Post',              
+       url: '/decline' ,
+       data :{ UserName : $scope.UserName}                                 
+       }).success(function(response){
+       if(response.code == "200")                                                           
+       window.location = '/user'; 
+       else
+        alert("No results found");
+                             
+}).error(function(error){             
+alert(error);
+        
+ });     
+  };
+
+   } 
+   ]);
+    
+ </script>
+<body ng-controller='user' >
+<div id="facebook-Bar">
+  <div id="facebook-Frame">
+        
+        <div id="header-main-right">
+          <div id="header-main-right-nav">
+        <form method="post" action="" id="login_form" name="login_form">
+          <table border="0" style="border:none">
+            <tr>
+              <td ><input type="submit" class="fbbutton" name="logout" value="Logout" ng-click="logout()" /></td>
+            </tr>
+             <tr>
+              <td ><input type="submit" class="fbbutton" name="homePage" value="Home" ng-click="home()" /></td>
+            </tr>
+            
+          </table>
+        </form>
+      </div>
+          </div>
+      </div>
+       </div>
+      </div>
+      
+      
+      
+<!--Page-->
+<div >
+    	<h4 class="title">User Profile .</h4>
+    	</div><!--loginheader-->
+  <div class="relative">
+<h2 style="color:#141823; text-align:center;"> <%= name%> Page</h2>
+<input type="hidden" name="UserName"  value="<%= name%>" ng-model="UserName" >
+	<div>
+        <div class="loginform">
+                	
+        	<form id="login" action="" method="post">
+        	<% if (flag == 0 && request == 0){ %>
+                <p>
+                	<button class="radius title" name="client_login" ng-click="Addfriend()">Add Friend</button>
+                </p>  
+                <% } else if(flag ==0 && request ==1 && sender == 1){%>
+                <p><h1><span class=""></span> friend request sent</h1></p>
+					<% } if (flag ==0 && request == 1 && sender == 0 ){  %>
+                <p>
+                <button type="submit" class="btn btn-success" ng-click="confirm()">confirm</button>
+                </p>
+                 <p>
+                <button type="submit" class="btn btn-success" ng-click="decline()">Decline</button>
+                </p>
+                <% } if(flag ==1 ) {%>
+                <h1><span class=""></span> Friends</h1>
+                <p>
+                <button type="submit" class="btn btn-success" ng-click="unfriend()">unfriend</button>
+ 				</p>
+				<% } %>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+  </body>
+
+</html>

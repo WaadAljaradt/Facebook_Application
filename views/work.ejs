@@ -1,0 +1,143 @@
+<html ng-app="workapp">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Facebook Style Home Page Design - demo by w3lessons.info</title>
+<link rel="stylesheet"  href='/stylesheets/style.css'  type="text/css" />
+<style>
+
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+</head>
+<script>
+         
+  var workapp = angular.module('workapp', []); 
+   
+  workapp.controller('work', ['$scope','$http',function($scope, $http) {        
+  $scope.logout = function() { $http({              
+       method: 'POST',              
+       url: '/logout'                                   
+       }).success(function(response){                                                          
+       window.location = '/signin';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+
+  $scope.about = function() { $http({              
+       method: 'get',              
+       url: '/about'                                   
+       }).success(function(response){                                                          
+       window.location = '/about';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+  
+  $scope.Done = function() { 
+  $http({              
+       method: 'POST',              
+       url: '/addwork',
+       data :{ "position": $scope.position,"company" :$scope.company,"jobDisc" :$scope.jobDisc,"startdate" :$scope.startdate ,"endDate" :$scope.endDate}                                   
+       }).success(function(response){ 
+       alert(response) ;                                                   
+       window.location = '/about';                       
+}).error(function(error){             
+ alert(error);          
+ });     
+  };
+  
+   } 
+   ]);
+    
+ </script>
+<body ng-controller='work' >
+<div id="facebook-Bar">
+  <div id="facebook-Frame">
+        
+        <div id="header-main-right">
+          <div id="header-main-right-nav">
+        <form method="post" action="" id="login_form" name="login_form">
+          <table border="0" style="border:none">
+            <tr>
+              <td ><input type="submit" class="fbbutton" name="logout" value="Logout" ng-click="logout()" /></td>
+            </tr>
+             <tr>
+              <td ><input type="submit" class="fbbutton" name="aboutPage" value="about" ng-click="about()" /></td>
+            </tr>   
+          </table>
+        </form>
+      </div>
+          </div>
+      </div>
+       </div>
+
+<!--Page-->
+<div >
+    		<h4 class="title">Work Page</h4>
+    	</div><!--loginheader-->
+  
+<div class="center">
+<h2 style="color:#141823; text-align:center;"></h2>
+	</div>
+  
+  <div>
+<h2 style="color:#141823; text-align:center;">Work Page</h2>
+	<div>
+<div class="loginform">  
+     
+ <% if (data != null) {for(var i=0; i < data.length; i++) { %>
+Position : <%= data[0].position%>  <br>
+company : <%= data[0].company%>  <br>
+Job Discription : <%= data[0].jobDisc%> <br>
+Start date  : <%= data[0].startdate%> <br>
+End date: <%= data[0].endDate%><br> 
+<br>
+<br>
+<% }} %>
+
+                	
+
+
+<form id="login" action="" method="post">
+ <p>   
+<input type="text" id="position" name="position" placeholder="position" value="" class="radius mini" ng-model="position" />
+</p>
+<p>   
+<input type="text" id="jobDisc" name="jobDisc" placeholder="jobDisc" value="" class="radius mini" ng-model="jobDisc" />
+</p>
+
+<p>   
+<input type="text" id="company" name="company" placeholder="company" class="radius mini" ng-model="company" />
+</p>
+<p>   
+<input type="date" id="startdate" name="startdate" placeholder="Start Date" value="" class="radius mini" ng-model="startdate" />
+
+</p>  
+<p>   
+<input type="date" id="endDate" name="endDate" placeholder="End Date" value="" class="radius mini" ng-model="endDate" />
+
+</p>  
+
+<p>
+<button class="radius title" name="Done" ng-click="Done()">Add work</button>
+ </p>
+      
+
+ 
+         
+</div>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,180 @@
+<html ng-app="Groupapp">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Facebook Style Home Page Design - demo by w3lessons.info</title>
+<link rel="stylesheet"  href='/stylesheets/style.css'  type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+</head>
+<script>
+         
+  var Groupapp = angular.module('Groupapp', []); 
+   
+      Groupapp.controller('Group', ['$scope','$http',function($scope, $http) {        
+    
+       $scope.addMember = function() { $http({              
+       method: 'POST',              
+       url: '/AddMember',              
+       data: { "MemberName": $scope.MemberName }                         
+       }).success(function(response){                                                    
+       if(response.addMember == "Success") {
+       alert(response.value);                 
+       window.location = '/Group';              
+      } else{ 
+        alert(response.value);     
+       window.location = '/Group';  
+       }       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+$scope.deleteMember = function() { $http({              
+       method: 'POST',              
+       url: '/deleteMember',              
+       data: { "MemberName": $scope.MemberName }                         
+       }).success(function(response){                                                    
+        if(response.addMember == "Success") {
+       alert(response.value);                 
+       window.location = '/Group';              
+      } else{ 
+        alert(response.value);     
+       window.location = '/Group';  
+       }               
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+
+
+  $scope.logout = function() { $http({              
+       method: 'POST',              
+       url: '/logout'                                   
+       }).success(function(response){                                                          
+       window.location = '/signin';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+  
+  $scope.deletegroup = function() { $http({              
+       method: 'POST',              
+       url: '/deletegroup'                                   
+       }).success(function(response){                                               
+       window.location = '/createGroup';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+
+
+ $scope.home = function() { $http({              
+       method: 'Get',              
+       url: '/profile'                                   
+       }).success(function(response){                                                          
+       window.location = '/profile';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+
+$scope.hideMember= function() { 
+  $scope.members = null; 
+};
+   
+ $scope.showMembers = function() { $http({              
+       method: 'POST',              
+       url: '/showMembers'                                   
+       }).success(function(response){ 
+       alert(response.value);
+       $scope.members = response.value;                                                                                 
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+
+   } 
+   
+   ]);
+    
+ </script>
+
+<body  ng-controller='Group' > 
+<div id="facebook-Bar">
+  <div id="facebook-Frame">
+
+        
+        <div id="header-main-right">
+          <div id="header-main-right-nav">
+        <form>
+          <table border="0" style="border:none">
+            <tr>
+              <td ><input type="submit" class="fbbutton" name="logout" value="Logout" ng-click="logout()" /></td>
+            </tr>
+            <tr>
+              <td ><input type="submit" class="fbbutton" name="homePage" value="Home" ng-click="home()" /></td>
+            </tr>
+            
+          </table>
+         </form> 
+      </div>
+          </div>
+      </div>
+       </div>
+      </div>
+      
+<!-- header ends here -->
+
+<div class="loginbox radius">
+<h2 style="color:#141823; text-align:center;">Welcome to Facebook</h2>
+	<div class="loginboxinner radius">
+    	<div class="loginheader">
+    	  <h4 class="title" >Group Name :<%= GroupName %>
+    	  
+    	</div><!--loginheader-->
+        
+        <div class="loginform">
+       Group Description :  <%= GroupDesc %></h4>
+                	
+        	<form action="" method="post">
+        	
+            	<p>
+                    <input type="text" id="MemberName" name="MemberName" placeholder="Add Member " value="" class="radius" ng-model="MemberName"/>
+                </p>
+                <p>
+                 
+                	<button class="radius title" name="addMember" ng-click="addMember()">Add Member</button>
+                </p>
+                 <p>
+                 
+                	<button class="radius title" name="deleteMember" ng-click="deleteMember()">Delete Member</button>
+                </p>
+                 <p>
+            	 <button class="radius title" name="deletegroup" value="Delete group" ng-click="deletegroup()">Delete Group </button>
+             	</p>
+           
+            	<p>
+                   <div ng-if="members == null">
+                	<button class="radius title" name="Show Members" ng-click="showMembers()">Show Members</button></div>
+                </p>
+                <div>
+                <ul >
+               <li ng-repeat="item in members"> {{item.userName}} </li></ul>
+                 </form>
+			</div>
+                <div ng-if="members != null">
+                	<button  name="hideName" ng-click="hideMember()">hide</button></div>
+
+        </div><!--loginform-->
+    </div><!--loginboxinner-->
+</div><!--loginbox-->
+</body>
+
+</html>
