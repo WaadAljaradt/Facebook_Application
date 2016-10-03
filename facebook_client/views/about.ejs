@@ -1,0 +1,150 @@
+<html ng-app="aboutapp">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Facebook Style Home Page Design - demo by w3lessons.info</title>
+<link rel="stylesheet"  href='/stylesheets/style.css'  type="text/css" />
+<style>
+
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+</head>
+<script>
+         
+  var aboutapp = angular.module('aboutapp', []); 
+   
+      aboutapp.controller('about', ['$scope','$http',function($scope, $http) {        
+
+  $scope.logout = function() { $http({              
+       method: 'POST',              
+       url: '/logout'                                   
+       }).success(function(response){                                                          
+       window.location = '/signin';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+  
+  
+  $scope.home = function() { $http({              
+       method: 'Get',              
+       url: '/profile'                                   
+       }).success(function(response){                                                          
+       window.location = '/profile';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+  
+   
+   } 
+   ]);
+    
+ </script>
+<body ng-controller='about' >
+<div id="facebook-Bar">
+  <div id="facebook-Frame">
+        
+        <div id="header-main-right">
+          <div id="header-main-right-nav">
+        <form method="post" action="" id="login_form" name="login_form">
+          <table border="0" style="border:none">
+            <tr>
+              <td ><input type="submit" class="fbbutton" name="logout" value="Logout" ng-click="logout()" /></td>
+            </tr>
+             <tr>
+              <td ><input type="submit" class="fbbutton" name="homePage" value="Home" ng-click="home()" /></td>
+            </tr>
+            
+          </table>
+        </form>
+      </div>
+          </div>
+      </div>
+       </div>
+      </div>
+      
+      
+      
+<!--Page-->
+<div >
+    		<h4 class="title">About Page.</h4>
+    	</div><!--loginheader-->
+  
+<div class="center">
+<h2 style="color:#141823; text-align:center;"></h2>
+	</div>
+  
+  <div>
+<h2 style="color:#141823; text-align:center;"> About Page</h2>
+	<div>
+    	
+        
+        <div class="loginform">
+                	
+        <table>
+	<tr>
+	<td><a href="#" class="btn btn-success">overview</a></td>
+      <tr></td>
+   </tr><br>
+
+    
+    
+  
+    <br><td> <tr><a href="/work" class="btn btn-success">Work</a>
+      <% if( work[0]!= null ){%>
+     position : <%= work[0].position%><br>
+     company : <%= work[0].company%><br>
+     jobDisc : <%= work[0].jobDisc%><br>
+     Start date :  <%= work[0].startdate%><br>
+     End Date :  <%= work[0].endDate%>
+     
+   </tr>
+    <% } %></td>
+    
+    <br><td> <tr><a href="/contacts" class="btn btn-success">contacts</a>
+   <% if(contacts!= null ){%>
+   
+     phone Number:<%= contacts.phoneNumber%><br>
+     current City :<%= contacts.currentCity%><br>
+     date Of Birth: <%= contacts.dateOfBirth%><br>
+      Contact Email: <%= contacts.emailc%>
+   </tr>
+    <% } %></td>
+    
+	<br><td><tr><a href="/event" class="btn btn-success">Life Events</a>
+	<% if(event[0]!= null ){%>
+  Event Name: <%= event[0].eventname%><br>
+  Event Discritption: <%= event[0].evenDisc%><br>
+  Event Place : <%= event[0].eventPlace%><br>
+  Event Date: <%= event[0].eventdate%>
+   </tr>
+    <% } %></td>
+
+    
+    
+</table>
+ <a href="/edu" class="btn btn-success">Education</a> 
+      <% if(education[0]!= null ){%>
+    Major : <td><%= education[0].major%><br>
+    University:  <td><%= education[0].University%><br>
+    Start Date : <td> <%= education[0].startdate%><br>
+    End Date : <td> <%= education[0].endDate%>
+   </tr>
+    <% } %>
+        </div>
+    </div>
+</div>
+
+  </body>
+
+</html>

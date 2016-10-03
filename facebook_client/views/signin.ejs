@@ -1,0 +1,138 @@
+<html ng-app="loginapp">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Facebook Style Home Page Design - demo by w3lessons.info</title>
+<link rel="stylesheet"  href='/stylesheets/style.css'  type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+</head>
+<script>
+         
+  var loginapp = angular.module('loginapp', []); 
+   
+      loginapp.controller('login', ['$scope','$http',function($scope, $http) {        
+       $scope.var1 = "abcd";   
+       $scope.signIn = function() { $http({              
+       method: 'POST',              
+       url: '/signin',              
+       data: { "Email": $scope.Email, "Password": $scope.Password }                         
+       }).success(function(response){                           
+       alert(JSON.stringify(response));                            
+       if(response.login == "Success")               
+       window.location = '/profile';              
+       else               
+       window.location = '/fail_login';         
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+
+  
+  $scope.signUp = function() { $http({              
+       method: 'POST',              
+       url: '/signup',              
+       data: { "Email": $scope.Email, "Password": $scope.Password,"FirstName" :$scope.FirstName,"LastName":$scope.LastName }                         
+       }).success(function(response){                           
+       alert(JSON.stringify(response));                                 
+       window.location = '/signin';                       
+}).error(function(error){             
+ alert("error");          
+ });     
+  };
+   } 
+   ]);
+    
+ </script>
+
+<body class="login"  ng-controller='login' > 
+<!-- header starts here -->
+<div id="facebook-Bar">
+  <div id="facebook-Frame">
+    <div id="logo"> <a href="http://w3lessons.info">W3lessons.info</a> </div>
+    
+         
+        <div id="header-main-right">
+          <div id="header-main-right-nav">
+        <form method="post" action="" id="login_form" name="login_form">
+          <table border="0" style="border:none">
+            <tr>
+              <td ><input type="text" tabindex="1"  id="email" placeholder="Email or Phone" name="email" class="inputtext radius1" value="" ng-model="Email" ></td>
+              <td ><input type="password" tabindex="2" id="pass" placeholder="Password" name="pass" class="inputtext radius1" ng-model="Password" ></td>
+              <td ><input type="submit" class="fbbutton" name="login" value="Login" ng-click="signIn()" /></td>
+            </tr>
+            <tr>
+            <td><label><input id="persist_box" type="checkbox" name="persistent" value="1" checked="1"/><span style="color:#ccc;">Keep me logged in</span></label>
+            </td>
+            <td><label><a href="" style="color:#ccc; text-decoration:none">forgot your password?</a></label></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+          </div>
+      </div>
+</div>
+<!-- header ends here -->
+
+<div class="loginbox radius">
+<h2 style="color:#141823; text-align:center;">Welcome to Facebook</h2>
+	<div class="loginboxinner radius">
+    	<div class="loginheader">
+    		<h4 class="title">Connect with friends and the world around you.</h4>
+    	</div><!--loginheader-->
+        
+        <div class="loginform">
+                	
+        	<form id="login" action="" method="post">
+            <p>
+                    <input type="text" id="username" name="username" placeholder="First Name" value="" class="radius mini" ng-model="FirstName" /> <input type="text" id="username" name="username" placeholder="Last Name" value="" class="radius mini" ng-model="LastName" />
+                </p>
+            	<p>
+                    <input type="text" id="username" name="username" placeholder="Your Email" value="" class="radius" ng-model="Email"/>
+                </p>
+                <p>
+                    <input type="password" id="password" name="password" placeholder="New Password" class="radius" ng-model="Password" />
+                </p>
+                <p>
+                 
+                	<button class="radius title" name="client_login" ng-click="signUp()">Sign Up for Facebook</button>
+                </p>
+            </form>
+        </div><!--loginform-->
+    </div><!--loginboxinner-->
+</div><!--loginbox-->
+
+<div id="ad" style="width:100%; margin-top:50px;">
+<center><script type="text/javascript"><!--
+google_ad_client = "ca-pub-5104998679826243";
+/* mysite */
+google_ad_slot = "2922638918";
+google_ad_width = 250;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script> 
+</center>
+</div>
+
+
+
+
+<p style="font-size:12px;">
+  <center>
+    <a href="http://w3lessons.info">by w3lessons.info</a>
+  </center>
+</p>
+
+</body>
+
+</html>
