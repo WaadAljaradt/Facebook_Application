@@ -1,6 +1,6 @@
-# Facebook_Application
+# Facebook_Application <\b>
 
-This is a prototype for facebook application that impelements some of the major features of facebook including 
+This is a prototype for facebook application that impelements some of the major features of facebook including <\b>
 1- singin and singup
 2- post on the wall and view other friends posts (NewsFeed) 
 3- show friendlist and friend requests
