@@ -20,7 +20,7 @@ Prototype for facebook application that impelements some of the major features o
 2- bootstrap and some online layouts<br />
 3- Mongodb : Schemaless db and rialable<br />
 4- rabbimq : it is a very suitable tool for data delivery, non-blocking operations and work queus used in this applciation<br />
-5- nodejs : persistent connection between browser and server and many other good stuff about Nodejs<br />
+5- nodejs : persistent connection between browser and server <br />
 
 # Usage<br />
 
