@@ -15,7 +15,7 @@ Prototype for facebook application that impelements some of the major features o
 10- add or edit your education, work, contact info and life events <br />
 11- add and view your interests<br />
 
-# Technologies  : <br />
+# Technologies <br />
 1- AngularJs for the frontend : a platform make it easy to implement MVC modal suiatble for this application desing<br />
 2- bootstrap and some online layouts<br />
 3- Mongodb : Schemaless db and rialable<br />
